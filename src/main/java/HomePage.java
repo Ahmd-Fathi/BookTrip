@@ -1,5 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
 
@@ -10,13 +14,14 @@ public class HomePage {
         this.driver=driver;
     }
 private By FirstDate=By.xpath("//body/div[@id='react-root']/div[@id='main-container']/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[6]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]");
+    private  By SearchFlightBtn=By.cssSelector("div[data-testid=\"home-page-flight-cta\"]");
     private  By SecondDate=By.xpath("/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[6]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]");
 private  By secondcountry=By.xpath("//body/div[@id='react-root']/div[@id='main-container']/div[1]/div[1]/div[3]/div[2]/div[3]/div[1]/div[3]/div[1]/div[2]/input[1]");
 private By firstcountry=By.xpath("//body/div[@id='react-root']/div[@id='main-container']/div[1]/div[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/input[1]");
 
 private  By NextMonthBtn=By.cssSelector("g[fill=\"none\"][transform=\"translate(1 1)\"] circle");
 private  By TextBoxForSecondCountry=By.xpath("//div[text()='Return Date']/following-sibling::div");
-
+ private  By firstAsserationAfterBook=By.cssSelector("div.css-76zvg2.r-homxoj.r-1hfyk0a > span:nth-of-type(1)");
 
 
     public void SetFirstAndSecondCountry(String firstCountryName1,String SecondCountry2) throws InterruptedException {
@@ -31,11 +36,24 @@ private  By TextBoxForSecondCountry=By.xpath("//div[text()='Return Date']/follow
         Thread.sleep(4000);
         driver.findElement(SecondDate).click();
 
-        //
-
-
 
     }
+
+
+public  flightDetailsPage  ClickOnSearchFlightBtn()
+{
+
+    driver.findElement(SearchFlightBtn).click();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(firstAsserationAfterBook));
+    return  new flightDetailsPage(driver);
+
+
+}
+
+
+
+
 
 
 
